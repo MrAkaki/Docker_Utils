@@ -7,13 +7,14 @@ RUN apt upgrade -y
 RUN apt install -y \
         iputils-ping \
         ca-certificates \
+        wget \
         curl \
         git \
         vim \
         nano \
         iperf3 \
         python3 \
-        python3-pip
+        python3-pip 
 
 # Install custom tools
 
@@ -26,6 +27,9 @@ RUN rm kubectl*
 RUN kubectl version --client
 ENV KUBECONFIG=/root/.kube/config.yaml
 
+#helm 3
+RUN curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+RUN helm repo add bitnami https://charts.bitnami.com/bitnami
 
 # Remove APT cache/data
 RUN apt-get clean
