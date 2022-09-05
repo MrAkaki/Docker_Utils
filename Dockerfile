@@ -14,7 +14,8 @@ RUN apt install -y \
         nano \
         iperf3 \
         python3 \
-        python3-pip 
+        python3-pip \
+        mariadb-client
 
 # Install custom tools
 
@@ -30,6 +31,8 @@ ENV KUBECONFIG=/root/.kube/config.yaml
 #helm 3
 RUN curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 RUN helm repo add bitnami https://charts.bitnami.com/bitnami
+
+RUN helm repo update
 
 # Remove APT cache/data
 RUN apt-get clean
